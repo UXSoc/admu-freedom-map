@@ -1,0 +1,14 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.map-pin {
+    transform: translate(-25px, -50px);
+}
+
+.panner-target > .image {
+    box-shadow: 0px 0px 50px rgba(0,0,0,0.8);
+}
+
+.panner-container {
+    width: 100vw;
+    height: 100vh;
+}
