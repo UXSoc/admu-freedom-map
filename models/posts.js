@@ -7,7 +7,11 @@ const PostSchema = new mongoose.Schema({
     },
     message: String,
     x: Number,
-    y: Number
+    y: Number,
+    isPosted: {
+        type: Boolean,
+        default: false
+    }
 });
 
 
