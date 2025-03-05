@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateneo Freedom Map</title>
-    <link rel="stylesheet" href="./pannerjs/styles/panner.css">
     <link rel="stylesheet" href="main.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div class="panner-container">
-        <div class="panner-target" id="ateneo_map">
-            <!-- ATENEO MAP IMG -->
-            <img class="image" src="./pannerjs/images/map.jpg">
-            
-            <!-- DIV FOR UI -->
-            <div class="panner_interface"></div>
-        </div>
-    </div>
-    <script type="module" src="./pannerjs/scripts/client.js"></script>
+  <svg id="map" viewBox="0 0 2000 2000">
+    <g id="map-content">
+      <image href="assets/ateneo-map.svg">
+    </g>
+    
+  </svg>
+  <script src="panning.js"></script>
 </body>
 </html>
