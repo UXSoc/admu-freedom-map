@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateneo Freedom Map</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -12,8 +13,17 @@
     <g id="map-content">
       <image href="assets/ateneo-map.svg">
     </g>
-    
   </svg>
+  <!-- burger button -->
+  <div id="burger-container">
+      <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+  </div>
+
+  <!-- overlay and menu SVG -->
+  <div id="overlay"></div>
+  <img id="menu-svg" src="assets/menu.svg" alt="Menu">
+
   <script src="panning.js"></script>
+  <script src="menu.js"></script> 
 </body>
 </html>
