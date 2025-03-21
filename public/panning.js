@@ -2,12 +2,12 @@ const svg_map = d3.select("#map");
 const g = d3.select("#map-content");
 
 // SVG map dimensions
-const mapWidth = 1009.37;
-const mapHeight = 828;
+const mapWidth = 10535;
+const mapHeight = 8575;
 
 // viewBox dimensions
-const viewBoxWidth = 2000;
-const viewBoxHeight = 2000;
+const viewBoxWidth = 4096;
+const viewBoxHeight = 4096;
 
 // Compute scaling to fit within the viewBox
 const scale = Math.min(viewBoxWidth / mapWidth, viewBoxHeight / mapHeight);
@@ -18,7 +18,7 @@ const translateY = (viewBoxHeight - mapHeight * scale) / 2;
 
 // zoom listener
 const zoom = d3.zoom()
-    .scaleExtent([1.5, 7]) // Minimum and maximum zoom levels
+    .scaleExtent([0.4, 6]) // Minimum and maximum zoom levels
     .on("zoom", (event) => {
         g.attr("transform", event.transform);
     });

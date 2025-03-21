@@ -10,3 +10,6 @@ body {
     height: 100vh;
     display: block;
 }
+
+/* Enable map panning on mobile */
+svg { touch-action: none; }
