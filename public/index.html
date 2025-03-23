@@ -14,10 +14,16 @@
       <image href="assets/map.svg">
     </g>
   </svg>
-  
+
   <!-- burger button -->
   <div id="burger-container">
       <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+  </div>
+
+  <!-- Pop-up form for adding a pin -->
+  <div id="popup-form" style="display: none;">
+    <textarea id="pin-message" placeholder="Type your message here..."></textarea>
+    <button id="submit-pin">Enter</button>
   </div>
 
   <!-- overlay and menu SVG -->
@@ -27,6 +33,7 @@
   <script src="panning.js"></script>
   <script src="menu.js"></script>
   <script src="hover.js"></script>
+  <script src="pin.js"></script>
     
 </body>
 </html>
