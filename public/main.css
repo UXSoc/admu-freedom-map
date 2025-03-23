@@ -10,3 +10,29 @@ body {
     height: 100vh;
     display: block;
 }
+
+#map-content image {
+    cursor: crosshair;
+}
+
+/* Enable map panning on mobile */
+svg { touch-action: none; }
+
+#popup-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+}
+#pin-message {
+    width: 80%;
+    height: 50px;
+    margin-right: 10px;
+}
+#submit-pin {
+    padding: 10px 20px;
+}

@@ -9,14 +9,21 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <svg id="map" viewBox="0 0 2000 2000">
+  <svg id="map" viewBox="0 0 4096 4096">
     <g id="map-content">
-      <image href="assets/ateneo-map.svg">
+      <image href="assets/map.svg">
     </g>
   </svg>
+
   <!-- burger button -->
   <div id="burger-container">
       <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+  </div>
+
+  <!-- Pop-up form for adding a pin -->
+  <div id="popup-form" style="display: none;">
+    <textarea id="pin-message" placeholder="Type your message here..."></textarea>
+    <button id="submit-pin">Enter</button>
   </div>
 
   <!-- overlay and menu SVG -->
@@ -24,6 +31,9 @@
   <img id="menu-svg" src="assets/menu.svg" alt="Menu">
 
   <script src="panning.js"></script>
-  <script src="menu.js"></script> 
+  <script src="menu.js"></script>
+  <script src="hover.js"></script>
+  <script src="pin.js"></script>
+    
 </body>
 </html>
