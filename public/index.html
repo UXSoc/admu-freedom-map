@@ -2,21 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateneo Freedom Map</title>
-    <link rel="stylesheet" href="./pannerjs/styles/panner.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div class="panner-container">
-        <div class="panner-target" id="ateneo_map">
-            <!-- ATENEO MAP IMG -->
-            <img class="image" src="./pannerjs/images/map.jpg">
-            
-            <!-- DIV FOR UI -->
-            <div class="panner_interface"></div>
-        </div>
-    </div>
-    <script type="module" src="./pannerjs/scripts/client.js"></script>
+  <svg id="map" viewBox="0 0 4096 4096">
+    <g id="map-content">
+      <image href="assets/map.svg">
+    </g>
+  </svg>
+
+  <!-- burger button -->
+  <div id="burger-container">
+      <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+  </div>
+
+  <!-- Pop-up form for adding a pin -->
+  <div id="popup-form" style="display: none;">
+    <textarea id="pin-message" placeholder="Type your message here..."></textarea>
+    <button id="submit-pin">Enter</button>
+  </div>
+
+  <!-- overlay and menu SVG -->
+  <div id="overlay"></div>
+  <img id="menu-svg" src="assets/menu.svg" alt="Menu">
+
+  <script src="panning.js"></script>
+  <script src="menu.js"></script>
+  <script src="hover.js"></script>
+  <script src="pin.js"></script>
+    
 </body>
 </html>
