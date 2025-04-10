@@ -1,0 +1,81 @@
+@import url('satoshi.css');
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: Satoshi-Regular;
+    color: #0D1E4C;
+}
+
+body {
+    overflow: hidden;
+    background-color: #1E3A5F;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+#map-content image {
+    cursor: crosshair;
+}
+
+/* Enable map panning on mobile */
+svg { touch-action: none; }
+
+#popup-form {
+    position: fixed;
+    bottom: 50px;
+    left: 75px;
+    right: 75px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+#popup-form h3 {
+    font-family: Satoshi-Black; 
+    opacity: 50%;
+}
+#pin-message {
+    font-family: Satoshi-Black;
+    height: 50px;
+    margin-right: 10px;
+    border: none;
+    background: transparent;
+    outline: none;
+    display: flex;
+    flex-grow: 1;
+    resize: none;
+}
+#submit-pin {
+    background: none;
+    border: none;
+    font-family: Satoshi-Black;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup {
+    background-color: #FFE8F5;
+    border: 13px solid #FF96E4;
+    border-radius: 50px;
+    padding: 30px;
+}
+
+.popup .close {
+    all: unset;
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    background-image: url('../assets/x_button.svg');
+}
