@@ -1,13 +1,27 @@
 const burgerButton = document.getElementById('burger-button');
-const menuSvg = document.getElementById('menu-about');
+const menuSvgObject = document.getElementById('menu-about');
 const overlay = document.getElementById('overlay');
 
-function handleMenuButtonClick(targetSvg) {
-    menuSvg.data = `assets/menu/${targetSvg}.svg`;
+const mobileBreakpoint = 480;
+
+function getMenuSVGPath(baseName) {
+    if (window.innerWidth <= mobileBreakpoint) {
+        return `assets/menu/mobile/${baseName}-mobile.svg`;
+    } else {
+        return `assets/menu/web/${baseName}-web.svg`;
+    }
+}
+
+function handleMenuButtonClick(target) {
+    loadMenuSVG(target);
+}
+
+function loadMenuSVG(baseName) {
+    menuSvgObject.data = getMenuSVGPath(baseName);
 }
 
 function attachMenuButtonListeners() {
-    const svgDoc = menuSvg.contentDocument;
+    const svgDoc = menuSvgObject.contentDocument;
 
     if (!svgDoc) {
         console.error("SVG document not loaded yet.");
@@ -17,46 +31,47 @@ function attachMenuButtonListeners() {
     const aboutButton = svgDoc.querySelector('#about-button');
     const faqButton = svgDoc.querySelector('#faq-button');
     const modButton = svgDoc.querySelector('#mod-button');
-    const backButton = svgDoc.querySelector('#back-button')
+    const backButton = svgDoc.querySelector('#back-button');
 
-    if (aboutButton) {
-        aboutButton.style.cursor = 'pointer';
-        aboutButton.addEventListener('click', () => handleMenuButtonClick('menu-about'));
-    }
-    if (faqButton) {
-        faqButton.style.cursor = 'pointer';
-        faqButton.addEventListener('click', () => handleMenuButtonClick('menu-faq'));
-    }
-    if (modButton) {
-        modButton.style.cursor = 'pointer';
-        modButton.addEventListener('click', () => handleMenuButtonClick('menu-mod'));
-    }
-    if (backButton) {
-        backButton.style.cursor = 'pointer';
-        backButton.addEventListener('click', () => {
-            menuSvg.style.display = 'none';
-            overlay.style.display = 'none';
-        });
-    }
+    const buttons = [aboutButton, faqButton, modButton, backButton];
+    buttons.forEach(button => {
+        if (button) {
+            button.style.cursor = 'pointer';
+            button.addEventListener('click', () => {
+                const id = button.id;
+                if (id === 'about-button') {
+                    loadMenuSVG('menu-about');
+                } else if (id === 'faq-button') {
+                    loadMenuSVG('menu-faq');
+                } else if (id === 'mod-button') {
+                    loadMenuSVG('menu-mod');
+                } else if (id === 'back-button') {
+                    hideMenu();
+                }
+            });
+        }
+    });
 }
 
-menuSvg.addEventListener('load', attachMenuButtonListeners);
+function hideMenu() {
+    menuSvgObject.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+menuSvgObject.addEventListener('load', attachMenuButtonListeners);
 
 burgerButton.addEventListener('click', () => {
-    const isMenuVisible = menuSvg.style.display === 'block';
-    menuSvg.style.display = isMenuVisible ? 'none' : 'block';
+    const isMenuVisible = menuSvgObject.style.display === 'block';
+    menuSvgObject.style.display = isMenuVisible ? 'none' : 'block';
     overlay.style.display = isMenuVisible ? 'none' : 'block';
 
-    if (!isMenuVisible && menuSvg.contentDocument) {
+    if (!isMenuVisible) {
+        loadMenuSVG('menu-about');
+    } else if (menuSvgObject.contentDocument) {
         attachMenuButtonListeners();
     }
 });
 
-overlay.addEventListener('click', () => {
-    menuSvg.style.display = 'none';
-    overlay.style.display = 'none';
-});
+overlay.addEventListener('click', hideMenu);
 
-if (menuSvg.contentDocument) {
-    attachMenuButtonListeners();
-}
+loadMenuSVG('menu-about');
