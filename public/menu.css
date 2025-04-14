@@ -22,6 +22,7 @@
     padding: 10px;
     z-index: 1000;
 }
+
 /* css for the menu */
 #menu-about, #menu-faq, #menu-mod {
     display: none;
