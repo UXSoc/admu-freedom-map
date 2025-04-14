@@ -23,7 +23,7 @@
 
   <!-- burger button -->
   <div id="burger-container">
-      <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+      <img id="burger-button" src="assets/menu/menu-button.svg" alt="Menu Button">
   </div>
 
   <!-- Pop-up form for adding a pin -->
@@ -34,14 +34,18 @@
 
   <!-- overlay and menu SVG -->
   <div id="overlay"></div>
-  <img id="menu-svg" src="assets/menu.svg" alt="Menu">
-
+  <div class="menu">
+    <object id="menu-about" type="image/svg+xml" data="assets/menu/menu-about.svg"></object>
+    <object id="menu-faq" type="image/svg+xml" data="assets/menu/menu-faq.svg"></object>
+    <object id="menu-mod" type="image/svg+xml" data="assets/menu/menu-mod.svg"></object>
+  </div>
+  
   <script src="panning.js"></script>
   <script src="menu.js"></script>
   <script src="hover.js"></script>
   <script src="pin.js"></script>
     
-<div id="zoom-slider-container">
+  <div id="zoom-slider-container">
     <img src="sliderjs/assets/zoom-in-icon.svg" id="zoom-in-icon"/>
     <div id="zoom-bar">
       <div id="zoom-thumb"></div>
