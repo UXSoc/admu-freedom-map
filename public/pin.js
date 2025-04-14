@@ -39,7 +39,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     .attr('x', item.x)
                     .attr('y', item.y)
                     .attr('width', 200)
-                    .attr('height', 400);
+                    .attr('height', 400)
+                    .attr('class', 'map-pin');
+                
+                // Create a speech bubble for the pin
+                const speechBubble = document.createElement('div');
+                speechBubble.className = 'speech-bubble';
+                speechBubble.textContent = item.message;
+                speechBubble.style.display = 'none';
+                document.body.appendChild(speechBubble);
+
+                // Add hover event listeners
+                pin.on('mouseenter', function () {
+                    // Change pin color to pink
+                    d3.select(this).attr('href', 'assets/pin-highlighted.svg');
+
+                    // Show the speech bubble
+                    const [pinX, pinY] = [item.x, item.y];
+                    speechBubble.style.left = `${pinX + 100}px`; // Center above the pin
+                    speechBubble.style.top = `${pinY - 50}px`; // Position above the pin
+                    speechBubble.style.display = 'block';
+                });
+
+                pin.on('mouseleave', function () {
+                    // Revert pin color to default
+                    d3.select(this).attr('href', 'assets/pin-default.svg');
+
+                    // Hide the speech bubble
+                    speechBubble.style.display = 'none';
+                });
             }
         });
     })
