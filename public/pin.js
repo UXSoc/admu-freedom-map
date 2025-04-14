@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach((item) => {
             if (item.isPosted) {
                 // Add the pin to the map
-                pinContainer.append('image')
+                const pin = pinContainer.append('image')
                     .attr('href', 'assets/pin-default.svg')
                     .attr('x', item.x)
                     .attr('y', item.y)
@@ -50,20 +50,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.appendChild(speechBubble);
 
                 // Add hover event listeners
-                pin.on('mouseenter', function () {
+                pin.on('mouseenter', function (event) {
                     // Change pin color to pink
                     d3.select(this).attr('href', 'assets/pin-highlighted.svg');
 
-                    // Show the speech bubble
-                    const [pinX, pinY] = [item.x, item.y];
-                    speechBubble.style.left = `${pinX + 100}px`; // Center above the pin
-                    speechBubble.style.top = `${pinY - 50}px`; // Position above the pin
+
+                    // Get the pin's position in the viewport
+                    const pinBBox = this.getBoundingClientRect();
+                    const bubbleX = pinBBox.x + pinBBox.width / 2;
+                    const bubbleY = pinBBox.y - 10; // Position above the pin
+
+
+                    // Position and show the speech bubble
+                    speechBubble.style.left = `${bubbleX}px`;
+                    speechBubble.style.top = `${bubbleY}px`;
                     speechBubble.style.display = 'block';
                 });
+
 
                 pin.on('mouseleave', function () {
                     // Revert pin color to default
                     d3.select(this).attr('href', 'assets/pin-default.svg');
+
 
                     // Hide the speech bubble
                     speechBubble.style.display = 'none';
