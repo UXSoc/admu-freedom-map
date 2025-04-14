@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add the pin to the map
                 pinContainer.append('image')
                     .attr('href', 'assets/pin-default.svg')
-                    .attr('x', x)
-                    .attr('y', y)
+                    .attr('x', item.x)
+                    .attr('y', item.y)
                     .attr('width', 200)
                     .attr('height', 400);
             }

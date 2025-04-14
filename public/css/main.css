@@ -85,8 +85,8 @@ svg { touch-action: none; }
 .notification {
     position: fixed;
     top: 20px;
-    right: 50%;
-    transform: translateX(-50%);
+    right: 90px;
+    /* transform: translateX(-50%); */
     background-color: #1E3A5F;
     color: #FF96E4;
     padding: 10px 20px;
