@@ -80,6 +80,20 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Current view: (${transform.applyX(x)}, ${transform.applyY(y)})`);
     });
 
+    document.querySelectorAll('.popup .close').forEach(button => {
+        button.addEventListener('click', () => {
+            const popup = button.closest('.popup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+            // Remove the temporary pin
+            if (tempPin) {
+                tempPin.remove();
+                tempPin = null;
+            }
+        });
+    });
+
     submitPin.addEventListener('click', () => {
         const message = pinMessage.value.trim();
         if (!message || !(pinX) || !(pinY)) return;
@@ -97,7 +111,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }),
         })
             .then((response) => response.json())
-            .then((data) => console.log('Pin saved:', data))
+            .then((data) => {
+                console.log('Pin saved:', data);
+
+                // Show notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = "We've sent your message to the admins for approval!";
+                document.body.appendChild(notification);
+
+                // Fade out and remove notification
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 1000);
+                }, 3000);
+            })
             .catch((error) => console.error('Error saving pin:', error));
 
         // Reset the form

@@ -28,9 +28,9 @@ svg { touch-action: none; }
 
 #popup-form {
     position: fixed;
-    bottom: 50px;
-    left: 75px;
-    right: 75px;
+    bottom: 5vh;
+    left: 15vw;
+    right: 15vw;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1002;
     justify-content: space-between;
@@ -40,6 +40,7 @@ svg { touch-action: none; }
 #popup-form h3 {
     font-family: Satoshi-Black; 
     opacity: 50%;
+    font-size: 2rem;
 }
 #pin-message {
     font-family: Satoshi-Black;
@@ -51,12 +52,13 @@ svg { touch-action: none; }
     display: flex;
     flex-grow: 1;
     resize: none;
+    font-size: 1.5rem;
 }
 #submit-pin {
     background: none;
     border: none;
     font-family: Satoshi-Black;
-    font-size: 20px;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
@@ -78,4 +80,21 @@ svg { touch-action: none; }
     height: 42px;
     cursor: pointer;
     background-image: url('../assets/x_button.svg');
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 50%;
+    transform: translateX(-50%);
+    background-color: #1E3A5F;
+    color: #FF96E4;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: Satoshi-Bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 1s ease;
+    z-index: 1003;
 }
