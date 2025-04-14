@@ -1,14 +1,14 @@
-/* css for the menu button */
+/* Default styles (mobile-first) */
 #burger-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 3vw;
+    right: 3vw;
     z-index: 1000;
 }
 
 #burger-button {
-    width: 50px;
-    height: 50px;
+    width: 12vw;
+    height: 12vw;
     cursor: pointer;
 }
 
@@ -23,7 +23,6 @@
     z-index: 1000;
 }
 
-/* css for the menu */
 #menu-about, #menu-faq, #menu-mod {
     display: none;
     position: fixed;
@@ -51,4 +50,38 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+}
+
+#logo-container {
+    position: absolute;
+    top: 3vw;
+    left: 3vw;
+}
+
+#logo-container img {
+    width: 45vw;
+    height: auto;
+}
+
+/* Styles for larger screens (tablet and desktop) */
+@media (min-width: 768px) {
+    #burger-container {
+        top: 1.5vw;
+        right: 1.5vw;
+    }
+
+    #burger-button {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    #logo-container {
+        top: 1.5vw;
+        left: 1.5vw;
+    }
+
+    #logo-container img {
+        width: 25vw;
+        height: auto;
+    }
 }
