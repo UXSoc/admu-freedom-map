@@ -22,8 +22,9 @@
     padding: 10px;
     z-index: 1000;
 }
+
 /* css for the menu */
-#menu-svg {
+#menu-about, #menu-faq, #menu-mod {
     display: none;
     position: fixed;
     top: 50%;
@@ -34,6 +35,11 @@
     max-height: 90%; 
     width: auto;
     height: auto;
+}
+
+#back-button {
+    cursor: pointer;
+    margin: 10px 0;
 }
 
 #overlay {

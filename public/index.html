@@ -16,9 +16,14 @@
     <g id="pin-container"></g>
   </svg>
 
+  <!-- freedom map logo -->
+  <div id="logo">
+    <img id="logo" src="assets/logo.svg" alt="Freedom Map Logo">
+  </div>
+
   <!-- burger button -->
   <div id="burger-container">
-      <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+      <img id="burger-button" src="assets/menu/menu-button.svg" alt="Menu Button">
   </div>
 
   <!-- Pop-up form for adding a pin -->
@@ -43,8 +48,10 @@
 
   <!-- overlay and menu SVG -->
   <div id="overlay"></div>
-  <img id="menu-svg" src="assets/menu.svg" alt="Menu">
-
+  <div class="menu">
+    <object id="menu-about" type="image/svg+xml" data="assets/menu/web/menu-about-web.svg"></object>
+  </div>
+  
   <!-- zoom slider -->
   <div id="zoom-slider-container">
     <img src="zoom-in-icon.png" id="zoom-in-icon" />
@@ -57,6 +64,6 @@
   <script src="menu.js"></script>
   <script src="hover.js"></script>
   <script src="pin2.js"></script>
-  <script src="slider.js"></script>    
+  <script src="slider.js"></script>
 </body>
 </html>
