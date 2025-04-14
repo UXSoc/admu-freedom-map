@@ -34,7 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach((item) => {
             if (item.isPosted) {
                 // Add the pin to the map
-                createPin(item.x, item.y);
+                pinContainer.append('image')
+                    .attr('href', 'assets/pin-default.svg')
+                    .attr('x', x)
+                    .attr('y', y)
+                    .attr('width', 200)
+                    .attr('height', 400);
             }
         });
     })
@@ -43,16 +48,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let pinX = null, pinY = null;
 
-    // Add pin on click
+    let tempPin = null;
+
     svg.on('click', function(event) {
         // Get click position relative to the zoomGroup (untransformed coords)
         const [x, y] = d3.pointer(event, zoomGroup.node());
-        pinX = x - pinWidth/2;
+        pinX = x - pinWidth / 2;
         pinY = y - pinHeight;
-        
+
         popupForm.style.display = 'block';
-        
-        createPin(pinX, pinY);
+
+        if (tempPin) {
+            // Update position of the existing temporary pin
+            tempPin
+                .attr('x', pinX)
+                .attr('y', pinY);
+        } else {
+            // Create a new temporary pin
+            tempPin = pinContainer.append('image')
+                .attr('href', 'assets/pin-default.svg')
+                .attr('x', pinX)
+                .attr('y', pinY)
+                .attr('width', 200)
+                .attr('height', 400)
+                .attr('opacity', "40%");
+        }
 
         // Display coordinates
         const transform = d3.zoomTransform(svg.node());
@@ -63,9 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     submitPin.addEventListener('click', () => {
         const message = pinMessage.value.trim();
         if (!message || !(pinX) || !(pinY)) return;
-    
-        
-        createPin(pinX, pinY);
         
         // Save the pin data to the database
         fetch('/api/posts', {
@@ -88,13 +105,4 @@ document.addEventListener('DOMContentLoaded', function() {
         popupForm.style.display = 'none';
         pinCoordinates = null;
     });
-
-    function createPin(x, y) {
-        return pinContainer.append('image')
-            .attr('href', 'assets/pin-default.svg')
-            .attr('x', x)
-            .attr('y', y)
-            .attr('width', 200)
-            .attr('height', 400);
-    }
 });
