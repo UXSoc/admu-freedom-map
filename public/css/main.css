@@ -40,7 +40,7 @@ svg { touch-action: none; }
 #popup-form h3 {
     font-family: Satoshi-Black; 
     opacity: 50%;
-    font-size: 2rem;
+    font-size: 1.5rem; /* Default for mobile */
 }
 #pin-message {
     font-family: Satoshi-Black;
@@ -52,21 +52,23 @@ svg { touch-action: none; }
     display: flex;
     flex-grow: 1;
     resize: none;
-    font-size: 1.5rem;
+    font-size: 1rem; /* Default for mobile */
 }
 #submit-pin {
     background: none;
     border: none;
     font-family: Satoshi-Black;
-    font-size: 1.5rem;
+    font-size: 1rem; /* Default for mobile */
     cursor: pointer;
 }
+
 
 .popup {
     background-color: #FFE8F5;
     border: 13px solid #FF96E4;
     border-radius: 50px;
     padding: 30px;
+    font-size: 1rem; /* Default for mobile */
 }
 
 .popup .close {
@@ -86,13 +88,12 @@ svg { touch-action: none; }
     position: fixed;
     top: 20px;
     right: 90px;
-    /* transform: translateX(-50%); */
     background-color: #1E3A5F;
     color: #FF96E4;
     padding: 10px 20px;
     border-radius: 8px;
     font-family: Satoshi-Bold;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Default for mobile */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     opacity: 1;
     transition: opacity 1s ease;
@@ -107,10 +108,36 @@ svg { touch-action: none; }
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-family: Satoshi-Regular;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Default for mobile */
     max-width: 300px;
     word-wrap: break-word;
     z-index: 1004;
     transform: translate(-50%, -100%);
     pointer-events: none;
 }
+
+
+/* Styles for larger screens (tablet and desktop) */
+@media (min-width: 768px) {
+    #popup-form h3 {
+        font-size: 2rem;
+    }
+    #pin-message {
+        font-size: 1.5rem;
+    }
+    #submit-pin {
+        font-size: 1.5rem;
+    }
+    .popup {
+        font-size: 1.2rem;
+    }
+    .notification {
+        font-size: 1rem;
+    }
+    .speech-bubble {
+        font-size: 1rem;
+    }
+}
+
+
+
