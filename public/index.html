@@ -4,36 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateneo Freedom Map</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <svg id="map" viewBox="0 0 4096 4096">
+  <svg id="map" viewBox="0 0 10535 8575">
     <g id="map-content">
-      <image href="assets/map.svg">
+      <image href="assets/map.svg" width="10535" height="8575">
     </g>
+    <g id="pin-container"></g>
   </svg>
+
+  <!-- freedom map logo -->
+  <div id="logo">
+    <img id="logo" src="assets/logo.svg" alt="Freedom Map Logo">
+  </div>
 
   <!-- burger button -->
   <div id="burger-container">
-      <img id="burger-button" src="assets/menu_button.svg" alt="Menu Button">
+      <img id="burger-button" src="assets/menu/menu-button.svg" alt="Menu Button">
   </div>
 
   <!-- Pop-up form for adding a pin -->
-  <div id="popup-form" style="display: none;">
-    <textarea id="pin-message" placeholder="Type your message here..."></textarea>
-    <button id="submit-pin">Enter</button>
+  <div class="popup" id="popup-form" style="display: none;">
+    <h3>You</h3>
+    <div style="display: flex">
+      <textarea id="pin-message" placeholder="Type your message here..."></textarea>
+      <button role="button" id="submit-pin">↵ Send</button>
+    </div>
+    <button role="button" class="close"></div>
   </div>
+  <script>
+    document.querySelectorAll('.popup .close').forEach(button => {
+      button.addEventListener('click', () => {
+        const popup = button.closest('.popup');
+        if (popup) {
+          popup.style.display = 'none';
+        }
+      });
+    });
+  </script>
 
   <!-- overlay and menu SVG -->
   <div id="overlay"></div>
-  <img id="menu-svg" src="assets/menu.svg" alt="Menu">
+  <div class="menu">
+    <object id="menu-about" type="image/svg+xml" data="assets/menu/web/menu-about-web.svg"></object>
+  </div>
+  
+  <!-- zoom slider -->
+  <div id="zoom-slider-container">
+    <img src="zoom-in-icon.png" id="zoom-in-icon" />
+    <div id="zoom-bar">
+      <div id="zoom-thumb"></div>
+    </div>
+    <img src="zoom-out-icon.png" id="zoom-out-icon" />
+  </div>  
 
-  <script src="panning.js"></script>
   <script src="menu.js"></script>
   <script src="hover.js"></script>
-  <script src="pin.js"></script>
-    
+  <script src="pin2.js"></script>
+  <script src="slider.js"></script>
 </body>
 </html>

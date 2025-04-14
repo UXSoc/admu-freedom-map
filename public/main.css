@@ -9,10 +9,26 @@ body {
     width: 100vw;
     height: 100vh;
     display: block;
-}
-
+  }
+  
 #map-content image {
     cursor: crosshair;
+}
+
+#logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 200px;
+}
+
+@media (max-width: 480px) {
+  #freedom-map-logo {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+  }
 }
 
 /* Enable map panning on mobile */
@@ -28,11 +44,64 @@ svg { touch-action: none; }
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1002;
 }
+
 #pin-message {
     width: 80%;
     height: 50px;
     margin-right: 10px;
 }
+
 #submit-pin {
     padding: 10px 20px;
+}
+
+#zoom-slider-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+#zoom-in-icon,
+#zoom-out-icon {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+#zoom-in-icon {
+  background-image: url('sliderjs/assets/zoom-in-icon.svg');
+}
+
+#zoom-out-icon {
+  background-image: url('sliderjs/assets/zoom-out-icon.svg');
+}
+
+#zoom-bar {
+  width: 16px;
+  height: 150px;
+  position: relative;
+  margin: 10px 0;
+  border-radius: 8px;
+  background-image: url('sliderjs/assets/slider-bar.svg'); 
+  background-color: transparent;
+}
+
+#zoom-thumb {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: -7px;
+  cursor: pointer;
+  touch-action: none;
+  background-image: url('sliderjs/assets/slider-thumb.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
