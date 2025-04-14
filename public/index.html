@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateneo Freedom Map</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="slider.js"></script>
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -23,25 +22,41 @@
   </div>
 
   <!-- Pop-up form for adding a pin -->
-  <div id="popup-form" style="display: none;">
-    <textarea id="pin-message" placeholder="Type your message here..."></textarea>
-    <button id="submit-pin">Enter</button>
+  <div class="popup" id="popup-form" style="display: none;">
+    <h3>You</h3>
+    <div style="display: flex">
+      <textarea id="pin-message" placeholder="Type your message here..."></textarea>
+      <button role="button" id="submit-pin">↵ Send</button>
+    </div>
+    <button role="button" class="close"></div>
   </div>
+  <script>
+    document.querySelectorAll('.popup .close').forEach(button => {
+      button.addEventListener('click', () => {
+        const popup = button.closest('.popup');
+        if (popup) {
+          popup.style.display = 'none';
+        }
+      });
+    });
+  </script>
 
   <!-- overlay and menu SVG -->
   <div id="overlay"></div>
   <img id="menu-svg" src="assets/menu.svg" alt="Menu">
 
+  <!-- zoom slider -->
+  <div id="zoom-slider-container">
+    <img src="zoom-in-icon.png" id="zoom-in-icon" />
+    <div id="zoom-bar">
+      <div id="zoom-thumb"></div>
+    </div>
+    <img src="zoom-out-icon.png" id="zoom-out-icon" />
+  </div>  
+
   <script src="menu.js"></script>
   <script src="hover.js"></script>
   <script src="pin2.js"></script>
-    
-    <div id="zoom-slider-container">
-        <img src="zoom-in-icon.png" id="zoom-in-icon" />
-        <div id="zoom-bar">
-          <div id="zoom-thumb"></div>
-        </div>
-        <img src="zoom-out-icon.png" id="zoom-out-icon" />
-      </div>      
+  <script src="slider.js"></script>    
 </body>
 </html>
