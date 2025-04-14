@@ -132,5 +132,11 @@ document.addEventListener('DOMContentLoaded', function() {
         pinMessage.value = '';
         popupForm.style.display = 'none';
         pinCoordinates = null;
+
+        // Remove the temporary pin
+        if (tempPin) {
+            tempPin.remove();
+            tempPin = null;
+        }
     });
 });
