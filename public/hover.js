@@ -1,4 +1,4 @@
-const mapImage = document.querySelector('#map-content image');
+const mapImage = document.querySelector('#map image');
 
 fetch(mapImage.getAttribute('href'))
     .then(response => response.text())
