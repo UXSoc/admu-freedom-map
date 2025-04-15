@@ -10,7 +10,37 @@
 
 body {
     overflow: hidden;
-    background-color: #1E3A5F;
+    background: linear-gradient(135deg, #77a8e0 25%, #5191db 75%);
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    color: #0D1E4C;
+}
+
+/* Add a subtle animated gradient effect */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Optional: Add a minimalist pattern overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.261) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: -1;
 }
 
 #map {
@@ -19,8 +49,8 @@ body {
     display: block;
 }
 
-#map-content image {
-    cursor: crosshair;
+#map-content {
+    position: relative; /* Ensure the pseudo-element is positioned relative to this element */
 }
 
 /* Enable map panning on mobile */
