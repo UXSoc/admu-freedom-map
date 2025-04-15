@@ -16,7 +16,7 @@ body {
     color: #0D1E4C;
 }
 
-/* Add a subtle animated gradient effect */
+/* for background animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -29,7 +29,6 @@ body {
     }
 }
 
-/* Optional: Add a minimalist pattern overlay */
 body::before {
     content: '';
     position: absolute;
@@ -49,8 +48,8 @@ body::before {
     display: block;
 }
 
-#map-content {
-    position: relative; /* Ensure the pseudo-element is positioned relative to this element */
+#map-content image {
+    cursor: crosshair;
 }
 
 /* Enable map panning on mobile */
