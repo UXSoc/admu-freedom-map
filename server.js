@@ -13,12 +13,9 @@ const dbPass = process.env.MONGODB_PASS;
 
 const routes = require('./routes/posts');
 
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@admu-freedom-map.kfrcb.mongodb.net/?retryWrites=true&w=majority&appName=admu-freedom-map`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@admu-freedom-map.kfrcb.mongodb.net/?retryWrites=true&w=majority&appName=admu-freedom-map`)
     .then(() => console.log('MongoDB connected...'))
-    .catch(err => console.log(err));
+    .catch(err => console.log('MongoDB connection error:', err));
 
 app.use(cors())
 app.use(bodyParser.json());
