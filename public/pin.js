@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Apply zoom to SVG
     svg.call(zoom)
         .on('dblclick.zoom', null);
-
     
     // Display all pins
     fetch('/api/posts')
@@ -86,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let tempPin = null;
 
-    svg.on('click', function(event) {
+    mapGroup.on('click', function(event) {
         // Get click position relative to the zoomGroup (untransformed coords)
         const [x, y] = d3.pointer(event, zoomGroup.node());
         pinX = x - pinWidth / 2;
