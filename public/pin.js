@@ -77,6 +77,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Hide the speech bubble
                     speechBubble.style.display = 'none';
                 });
+
+                // on mouse hold, force placement of temporary pin after 300ms
+                let holdTimeout = null;
+                let isDragging = false;
+                pin.on('mousedown touchstart', function (event) {
+                    isDragging = false;
+
+                    holdTimeout = setTimeout(() => {
+                        if (!isDragging) {
+                            addTempPin(event);
+                        }
+                    }, 300);
+                });
+                pin.on('mousemove touchmove', function () {
+                    isDragging = true;
+                    clearTimeout(holdTimeout);
+                });
+                pin.on('mouseup touchend', function () {
+                    clearTimeout(holdTimeout);
+                });
+                pin.on('mouseleave touchcancel', function () {
+                    clearTimeout(holdTimeout);
+                });
             }
         });
     })
@@ -93,32 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (clickedPin) { return; }
 
         addTempPin(event);
-    });
-
-    // on mouse hold, force placement of temporary pin after 300ms
-    let holdTimeout = null;
-    let isDragging = false;
-    mapGroup.on('mousedown touchstart', function (event) {
-        isDragging = false;
-
-        holdTimeout = setTimeout(() => {
-            if (!isDragging) {
-                addTempPin(event);
-            }
-        }, 300);
-    });
-
-    mapGroup.on('mousemove touchmove', function () {
-        isDragging = true;
-        clearTimeout(holdTimeout);
-    });
-
-    mapGroup.on('mouseup touchend', function () {
-        clearTimeout(holdTimeout);
-    });
-
-    mapGroup.on('mouseleave touchcancel', function () {
-        clearTimeout(holdTimeout);
     });
 
     // on pop-up close, hide pop-up and remove temporary pin
