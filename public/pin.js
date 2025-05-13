@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .on('dblclick.zoom', null);
     
     // Display all pins
+    let clickedPin = false; // variable to check if user is currently clicking/hovering on an existing pin
     fetch('/api/posts')
     .then((response) => response.json())
     .then((data) => {
@@ -50,15 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Add hover event listeners
                 pin.on('mouseenter', function (event) {
+                    clickedPin = true;
+                    
                     // Change pin color to pink
                     d3.select(this).attr('href', 'assets/pin-highlighted.svg');
-
 
                     // Get the pin's position in the viewport
                     const pinBBox = this.getBoundingClientRect();
                     const bubbleX = pinBBox.x + pinBBox.width / 2;
                     const bubbleY = pinBBox.y - 10; // Position above the pin
-
 
                     // Position and show the speech bubble
                     speechBubble.style.left = `${bubbleX}px`;
@@ -68,9 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                 pin.on('mouseleave', function () {
+                    clickedPin = false;
+
                     // Revert pin color to default
                     d3.select(this).attr('href', 'assets/pin-default.svg');
-
 
                     // Hide the speech bubble
                     speechBubble.style.display = 'none';
@@ -86,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let tempPin = null;
 
     mapGroup.on('click', function(event) {
+        if (clickedPin) { return; }
+
         // Get click position relative to the zoomGroup (untransformed coords)
         const [x, y] = d3.pointer(event, zoomGroup.node());
         pinX = x - pinWidth / 2;
