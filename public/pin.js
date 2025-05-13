@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.appendChild(speechBubble);
 
                 // Add hover event listeners
-                let holdTimeout = null;
-                let isDragging = false;
                 pin.on('mouseenter', function (event) {
                     clickedPin = true;
                     
@@ -67,41 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     speechBubble.style.left = `${bubbleX}px`;
                     speechBubble.style.top = `${bubbleY}px`;
                     speechBubble.style.display = 'block';
+
+                    
                 });
 
 
                 pin.on('mouseleave', function () {
                     clickedPin = false;
-                    console.log("mouse leave");
                     // Revert pin color to default
                     d3.select(this).attr('href', 'assets/pin-default.svg');
 
                     // Hide the speech bubble
                     speechBubble.style.display = 'none';
-
-                    clearTimeout(holdTimeout);
-                });
-
-                // on mouse hold, force placement of temporary pin after 300ms
-                
-                pin.on('mousedown touchstart', function (event) {
-                    isDragging = false;
-
-                    holdTimeout = setTimeout(() => {
-                        if (!isDragging) {
-                            addTempPin(event);
-                        }
-                    }, 300);
-                });
-                pin.on('mousemove touchmove', function () {
-                    isDragging = true;
-                    clearTimeout(holdTimeout);
-                });
-                pin.on('mouseup touchend', function () {
-                    clearTimeout(holdTimeout);
-                });
-                pin.on('touchcancel', function () {
-                    clearTimeout(holdTimeout);
                 });
             }
         });
@@ -129,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.style.display = 'none';
             }
             
-            removeTempPin();
+            removeTempPin(false);
         });
     });
 
@@ -167,12 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch((error) => console.error('Error saving pin:', error));
 
-        // Reset the form
-        pinMessage.value = '';
-        popupForm.style.display = 'none';
-        pinCoordinates = null;
-
-        removeTempPin();
+        removeTempPin(true);
     });
 
     function addTempPin(event) {
@@ -205,7 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Current view: (${transform.applyX(x)}, ${transform.applyY(y)})`);
     }
 
-    function removeTempPin(){
+    function removeTempPin(includePopup){
+        // Reset the form
+        if (includePopup){
+            pinMessage.value = '';
+            popupForm.style.display = 'none';
+            pinCoordinates = null;
+        }
+
         if (tempPin) {
             tempPin.remove();
             tempPin = null;
