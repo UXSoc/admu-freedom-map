@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.appendChild(speechBubble);
 
                 // Add hover event listeners
+                let holdTimeout = null;
+                let isDragging = false;
                 pin.on('mouseenter', function (event) {
                     clickedPin = true;
                     
@@ -70,17 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 pin.on('mouseleave', function () {
                     clickedPin = false;
-
+                    console.log("mouse leave");
                     // Revert pin color to default
                     d3.select(this).attr('href', 'assets/pin-default.svg');
 
                     // Hide the speech bubble
                     speechBubble.style.display = 'none';
+
+                    clearTimeout(holdTimeout);
                 });
 
                 // on mouse hold, force placement of temporary pin after 300ms
-                let holdTimeout = null;
-                let isDragging = false;
+                
                 pin.on('mousedown touchstart', function (event) {
                     isDragging = false;
 
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pin.on('mouseup touchend', function () {
                     clearTimeout(holdTimeout);
                 });
-                pin.on('mouseleave touchcancel', function () {
+                pin.on('touchcancel', function () {
                     clearTimeout(holdTimeout);
                 });
             }
