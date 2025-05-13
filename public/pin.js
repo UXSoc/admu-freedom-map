@@ -96,16 +96,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // on mouse hold, force placement of temporary pin after 300ms
-    mapGroup.on('mousedown', function (event) {
+    let holdTimeout = null;
+    let isDragging = false;
+    mapGroup.on('mousedown touchstart', function (event) {
+        isDragging = false;
+
         holdTimeout = setTimeout(() => {
-            addTempPin(event);
-            // console.log("Held for 0.3s.");
+            if (!isDragging) {
+                addTempPin(event);
+            }
         }, 300);
     });
-    mapGroup.on('mouseup', function () {
+
+    mapGroup.on('mousemove touchmove', function () {
+        isDragging = true;
         clearTimeout(holdTimeout);
     });
-    mapGroup.on('mouseleave', function () {
+
+    mapGroup.on('mouseup touchend', function () {
+        clearTimeout(holdTimeout);
+    });
+
+    mapGroup.on('mouseleave touchcancel', function () {
         clearTimeout(holdTimeout);
     });
 
