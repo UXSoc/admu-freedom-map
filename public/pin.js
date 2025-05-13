@@ -87,49 +87,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let tempPin = null;
 
+    // on mouse click
     mapGroup.on('click', function(event) {
+        // if an existing pin is clicked/hovered, don't add pin
         if (clickedPin) { return; }
 
-        // Get click position relative to the zoomGroup (untransformed coords)
-        const [x, y] = d3.pointer(event, zoomGroup.node());
-        pinX = x - pinWidth / 2;
-        pinY = y - pinHeight + pinHeight*0.07; // png of pin has free space at the bottom; add negative bottom margin to fix
-
-        popupForm.style.display = 'block';
-
-        if (tempPin) {
-            // Update position of the existing temporary pin
-            tempPin
-                .attr('x', pinX)
-                .attr('y', pinY);
-        } else {
-            // Create a new temporary pin
-            tempPin = pinContainer.append('image')
-                .attr('href', 'assets/pin-default.svg')
-                .attr('x', pinX)
-                .attr('y', pinY)
-                .attr('width', 200)
-                .attr('height', 400)
-                .attr('opacity', "40%");
-        }
-
-        // Display coordinates
-        const transform = d3.zoomTransform(svg.node());
-        console.log(`Pin placed at original: (${x}, ${y})`);
-        console.log(`Current view: (${transform.applyX(x)}, ${transform.applyY(y)})`);
+        addTempPin(event);
     });
 
+    // on mouse hold, force placement of temporary pin after 300ms
+    mapGroup.on('mousedown', function (event) {
+        holdTimeout = setTimeout(() => {
+            addTempPin(event);
+            // console.log("Held for 0.3s.");
+        }, 300);
+    });
+    mapGroup.on('mouseup', function () {
+        clearTimeout(holdTimeout);
+    });
+    mapGroup.on('mouseleave', function () {
+        clearTimeout(holdTimeout);
+    });
+
+    // on pop-up close, hide pop-up and remove temporary pin
     document.querySelectorAll('.popup .close').forEach(button => {
         button.addEventListener('click', () => {
             const popup = button.closest('.popup');
             if (popup) {
                 popup.style.display = 'none';
             }
-            // Remove the temporary pin
-            if (tempPin) {
-                tempPin.remove();
-                tempPin = null;
-            }
+            
+            removeTempPin();
         });
     });
 
@@ -172,10 +160,44 @@ document.addEventListener('DOMContentLoaded', function() {
         popupForm.style.display = 'none';
         pinCoordinates = null;
 
-        // Remove the temporary pin
+        removeTempPin();
+    });
+
+    function addTempPin(event) {
+        // Get click position relative to the zoomGroup (untransformed coords)
+        const [x, y] = d3.pointer(event, zoomGroup.node());
+        pinX = x - pinWidth / 2;
+        pinY = y - pinHeight + pinHeight*0.07; // png of pin has free space at the bottom; add negative bottom margin to fix
+
+        popupForm.style.display = 'block';
+
+        if (tempPin) {
+            // Update position of the existing temporary pin
+            tempPin
+                .attr('x', pinX)
+                .attr('y', pinY);
+        } else {
+            // Create a new temporary pin
+            tempPin = pinContainer.append('image')
+                .attr('href', 'assets/pin-default.svg')
+                .attr('x', pinX)
+                .attr('y', pinY)
+                .attr('width', 200)
+                .attr('height', 400)
+                .attr('opacity', "40%");
+        }
+
+        // Display coordinates
+        const transform = d3.zoomTransform(svg.node());
+        console.log(`Pin placed at original: (${x}, ${y})`);
+        console.log(`Current view: (${transform.applyX(x)}, ${transform.applyY(y)})`);
+    }
+
+    function removeTempPin(){
         if (tempPin) {
             tempPin.remove();
             tempPin = null;
         }
-    });
+    }
+
 });
