@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     speechBubble.style.top = `${bubbleY}px`;
                     speechBubble.style.display = 'block';
 
-                    
+                    // Check if the user is on a mobile device
+                    if (/Mobi|Android/i.test(navigator.userAgent)) {
+                        removeTempPin(true);
+                    }
                 });
 
 
