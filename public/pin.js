@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get click position relative to the zoomGroup (untransformed coords)
         const [x, y] = d3.pointer(event, zoomGroup.node());
         pinX = x - pinWidth / 2;
-        pinY = y - pinHeight;
+        pinY = y - pinHeight + pinHeight*0.07; // png of pin has free space at the bottom; add negative bottom margin to fix
 
         popupForm.style.display = 'block';
 
