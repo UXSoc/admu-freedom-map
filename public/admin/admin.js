@@ -148,7 +148,7 @@ function fetchAndRenderPosts() {
 
                     // Coordinates column
                     const coordinatesTd = document.createElement('td');
-                    coordinatesTd.textContent = `(${item.x}, ${item.y})`;
+                    coordinatesTd.textContent = `(${item.x.toFixed(2)}, ${item.y.toFixed(2)})`;
 
                     // Actions column
                     const actionsTd = document.createElement('td');

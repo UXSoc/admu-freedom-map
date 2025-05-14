@@ -7,7 +7,7 @@
 
 /* General Styles */
 body {
-    overflow: hidden;
+    overflow: auto;
     background: linear-gradient(135deg, #77a8e0 25%, #5191db 75%);
     background-size: 200% 200%;
     animation: gradientAnimation 10s ease infinite;
