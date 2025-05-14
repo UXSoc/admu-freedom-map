@@ -1,6 +1,87 @@
-// Function to fetch and render posts
+const passwordPage = document.getElementById('password-page');
+const adminPage = document.getElementById('admin-page');
+const submitPasswordButton = document.getElementById('submit-password');
+const adminPasswordInput = document.getElementById('admin-password');
+const errorMessage = document.getElementById('error-message');
+
+// Check if the user is already authenticated
+if (localStorage.getItem('token')) {
+    verifyTokenAndShowAdminPage();
+} else {
+    showPasswordPage();
+}
+
+// Show the password input page
+function showPasswordPage() {
+    passwordPage.style.display = 'flex';
+    adminPage.style.display = 'none';
+}
+
+// Show the admin moderation page
+function showAdminPage() {
+    passwordPage.style.display = 'none';
+    adminPage.style.display = 'block';
+    fetchAndRenderPosts(); // Fetch and render posts when the admin page is shown
+}
+
+// Handle password submission
+submitPasswordButton.addEventListener('click', () => {
+    const username = document.getElementById('admin-username').value.trim();
+    const password = adminPasswordInput.value;
+    console.log(username);
+    console.log(password);
+    fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Invalid username or password');
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('token', data.token); // Store the token
+            showAdminPage();
+        })
+        .catch(error => {
+            errorMessage.style.display = 'block'; // Show error message
+            console.error('Error during login:', error);
+        });
+});
+
+// Verify the token and show the admin page
+function verifyTokenAndShowAdminPage() {
+    const token = localStorage.getItem('token');
+    fetch('/api/posts', {
+        headers: {
+            Authorization: token,
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                showAdminPage();
+            } else {
+                throw new Error('Unauthorized');
+            }
+        })
+        .catch(error => {
+            console.error('Error verifying token:', error);
+            showPasswordPage();
+        });
+}
+
+// Fetch and render posts
 function fetchAndRenderPosts() {
-    fetch('/api/posts')
+    const token = localStorage.getItem('token');
+    fetch('/api/posts', {
+        headers: {
+            Authorization: token,
+        },
+    })
         .then(response => response.json())
         .then(data => {
             const pendingTbody = document.getElementById('posts').getElementsByTagName('tbody')[0];
@@ -94,10 +175,12 @@ function fetchAndRenderPosts() {
 
 // Approve a post
 function approvePost(postId) {
+    const token = localStorage.getItem('token');
     fetch(`/api/post/${postId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: token,
         },
         body: JSON.stringify({ isPosted: true }),
     })
@@ -113,8 +196,12 @@ function approvePost(postId) {
 
 // Reject a post
 function rejectPost(postId) {
+    const token = localStorage.getItem('token');
     fetch(`/api/post/${postId}`, {
         method: 'DELETE',
+        headers: {
+            Authorization: token,
+        },
     })
         .then(response => {
             if (response.ok) {
@@ -128,8 +215,12 @@ function rejectPost(postId) {
 
 // Delete a posted pin
 function deletePost(postId) {
+    const token = localStorage.getItem('token');
     fetch(`/api/post/${postId}`, {
         method: 'DELETE',
+        headers: {
+            Authorization: token,
+        },
     })
         .then(response => {
             if (response.ok) {
@@ -140,6 +231,3 @@ function deletePost(postId) {
         })
         .catch(error => console.error('Error deleting posted pin:', error));
 }
-
-// Initial fetch and render of posts
-fetchAndRenderPosts();

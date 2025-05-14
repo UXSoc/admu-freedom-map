@@ -7,38 +7,50 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <h1>Admin Moderation Panel</h1>
+    <!-- Password Input Page -->
+    <div id="password-page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+        <h1>Admin Login</h1>
+        <input type="text" id="admin-username" placeholder="Enter username" style="padding: 10px; font-size: 1rem; margin-bottom: 10px;">
+        <input type="password" id="admin-password" placeholder="Enter password" style="padding: 10px; font-size: 1rem; margin-bottom: 10px;">
+        <button id="submit-password" style="padding: 10px 20px; font-size: 1rem;">Login</button>
+        <p id="error-message" style="color: red; display: none;">Invalid username or password. Please try again.</p>
+    </div>
 
-    <!-- Section for pending posts -->
-    <h2>Pending Posts</h2>
-    <table id="posts">
-        <thead>
-            <tr>
-                <th>Message</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Pending posts will be dynamically added here -->
-        </tbody>
-    </table>
-    <div id="empty-message" class="empty-message" style="display: none;">No posts to moderate.</div>
+    <!-- Admin Moderation Page -->
+    <div id="admin-page" style="display: none;">
+        <h1>Admin Moderation Panel</h1>
 
-    <!-- Section for already-posted pins -->
-    <h2>Posted Pins</h2>
-    <table id="posted-pins">
-        <thead>
-            <tr>
-                <th>Message</th>
-                <th>Coordinates</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Posted pins will be dynamically added here -->
-        </tbody>
-    </table>
-    <div id="empty-posted-message" class="empty-message" style="display: none;">No posted pins available.</div>
+        <!-- Section for pending posts -->
+        <h2>Pending Posts</h2>
+        <table id="posts">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pending posts will be dynamically added here -->
+            </tbody>
+        </table>
+        <div id="empty-message" class="empty-message" style="display: none;">No posts to moderate.</div>
+
+        <!-- Section for already-posted pins -->
+        <h2>Posted Pins</h2>
+        <table id="posted-pins">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Coordinates</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Posted pins will be dynamically added here -->
+            </tbody>
+        </table>
+        <div id="empty-posted-message" class="empty-message" style="display: none;">No posted pins available.</div>
+    </div>
 
     <script src="admin.js"></script>
 </body>
