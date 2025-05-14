@@ -2,20 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Ateneo Freedom Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Moderation - Ateneo Freedom Map</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
+    <h1>Admin Moderation Panel</h1>
+
+    <!-- Section for pending posts -->
+    <h2>Pending Posts</h2>
     <table id="posts">
         <thead>
             <tr>
                 <th>Message</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Pending posts will be dynamically added here -->
         </tbody>
     </table>
+    <div id="empty-message" class="empty-message" style="display: none;">No posts to moderate.</div>
+
+    <!-- Section for already-posted pins -->
+    <h2>Posted Pins</h2>
+    <table id="posted-pins">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Coordinates</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Posted pins will be dynamically added here -->
+        </tbody>
+    </table>
+    <div id="empty-posted-message" class="empty-message" style="display: none;">No posted pins available.</div>
+
     <script src="admin.js"></script>
 </body>
 </html>
