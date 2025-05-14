@@ -24,16 +24,40 @@ jobs:
     - name: Fetch deployment branch
       run: git fetch origin deployment:deployment
 
-    - name: Attempt merge
+    - name: Attempt merge and resolve package conflicts
       id: merge_attempt
       run: |
         git checkout deployment
-        git merge origin/main --no-edit || echo "MERGE_FAILED=true" >> $GITHUB_ENV
-
+        # Attempt merge
+        if ! git merge origin/main --no-edit; then
+          # If merge fails due to package conflicts, reset and reinstall
+          echo "MERGE_FAILED=true" >> $GITHUB_ENV
+          exit 0
+        fi
+        
+        # After successful merge, ensure package consistency
+        echo "Ensuring package consistency..."
+        rm -rf node_modules/ package-lock.json
+        npm install
+        git add package-lock.json
+        git commit -m "Update package-lock.json after merge" || echo "No package-lock changes"
+        
     - name: Push to deployment branch
       if: env.MERGE_FAILED != 'true'
       run: |
         git push origin deployment
+
+    - name: Set up Node.js
+      if: env.MERGE_FAILED != 'true'
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    - name: Install dependencies
+      if: env.MERGE_FAILED != 'true'
+      run: |
+        npm ci  # Uses package-lock.json for exact versions
 
     - name: Deploy to Fly.io
       if: env.MERGE_FAILED != 'true'
