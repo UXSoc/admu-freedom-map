@@ -20,7 +20,7 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@admu-freedom-map.kfrcb.mongo
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
