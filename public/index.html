@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ateneo Freedom Map</title>
+    <title>Atenean Freedom Map</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <svg id="map" viewBox="0 0 10535 8575">
@@ -21,11 +23,6 @@
     <img id="logo" src="assets/logo.svg" alt="Freedom Map Logo">
   </div>
 
-  <!-- burger button -->
-  <div id="burger-container">
-      <img id="burger-button" src="assets/menu/menu-button.svg" alt="Menu Button">
-  </div>
-
   <!-- Pop-up form for adding a pin -->
   <div class="popup" id="popup-form" style="display: none;">
     <h3>You</h3>
@@ -36,10 +33,17 @@
     <button role="button" class="close"></div>
   </div>
 
-  <!-- overlay and menu SVG -->
-  <div id="overlay"></div>
-  <div class="menu">
-    <object id="menu-about" type="image/svg+xml" data="assets/menu/web/menu-about-web.svg"></object>
+  <!-- burger button -->
+  <div id="burger-container">
+      <img id="burger-button" src="assets/menu/menu-button.svg" alt="Menu Button">
+  </div>
+
+  <!-- Overlay for the menu -->
+  <div id="overlay" style="display: none;"></div>
+
+  <!-- Container for the menu SVG -->
+  <div id="menu-container" style="display: none;">
+      <object id="menu-svg" type="image/svg+xml"></object>
   </div>
   
   <!-- zoom slider -->
@@ -51,9 +55,9 @@
     <img src="assets/zoom-out-icon.svg" id="zoom-out-icon" />
   </div>   -->
 
-  <script src="menu.js"></script>
+  <script src="main.js"></script>
   <script src="hover.js"></script>
-  <script src="pin.js"></script>
+  <!-- <script src="menu.js"></script> -->
   <!-- <script src="slider.js"></script> -->
 </body>
 </html>
