@@ -10,7 +10,36 @@
 
 body {
     overflow: hidden;
-    background-color: #1E3A5F;
+    background: linear-gradient(135deg, #77a8e0 25%, #5191db 75%);
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    color: #0D1E4C;
+}
+
+/* for background animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.261) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: -1;
 }
 
 #map {
@@ -28,9 +57,9 @@ svg { touch-action: none; }
 
 #popup-form {
     position: fixed;
-    bottom: 5vh;
-    left: 15vw;
-    right: 15vw;
+    bottom: 2vh;
+    left: 5vw;
+    right: 5vw;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1002;
     justify-content: space-between;
@@ -40,7 +69,7 @@ svg { touch-action: none; }
 #popup-form h3 {
     font-family: Satoshi-Black; 
     opacity: 50%;
-    font-size: 1.5rem; /* Default for mobile */
+    font-size: 1.3rem; /* Default for mobile */
 }
 #pin-message {
     font-family: Satoshi-Black;
@@ -52,13 +81,13 @@ svg { touch-action: none; }
     display: flex;
     flex-grow: 1;
     resize: none;
-    font-size: 1rem; /* Default for mobile */
+    font-size: 0.8rem;
 }
 #submit-pin {
     background: none;
     border: none;
     font-family: Satoshi-Black;
-    font-size: 1rem; /* Default for mobile */
+    font-size: 0.8rem;
     cursor: pointer;
 }
 
@@ -68,7 +97,7 @@ svg { touch-action: none; }
     border: 13px solid #FF96E4;
     border-radius: 50px;
     padding: 30px;
-    font-size: 1rem; /* Default for mobile */
+    font-size: 0.8rem;
 }
 
 .popup .close {
@@ -108,7 +137,7 @@ svg { touch-action: none; }
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-family: Satoshi-Regular;
-    font-size: 0.9rem; /* Default for mobile */
+    font-size: 0.9rem;
     max-width: 300px;
     word-wrap: break-word;
     z-index: 1004;
@@ -119,8 +148,15 @@ svg { touch-action: none; }
 
 /* Styles for larger screens (tablet and desktop) */
 @media (min-width: 768px) {
+    #popup-form {
+        left: 15vw;
+        right: 15vw;
+        bottom: 5vh;
+    }
+
     #popup-form h3 {
         font-size: 2rem;
+        
     }
     #pin-message {
         font-size: 1.5rem;
