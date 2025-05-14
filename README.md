@@ -3,7 +3,7 @@ The Atenean Freedom Map is an interactive web application that allows users to e
 
 
 <h3 align="center">
-    🗺️ Try it out here: <a href="https://admu-freedom-map.fly.dev/">Atenean Freedom Map </a> 🗺️
+    🗺️ Try it out here: <a href="https://freedom-map.uxsociety.org/">Atenean Freedom Map </a> 🗺️
 </h3>
 
 
