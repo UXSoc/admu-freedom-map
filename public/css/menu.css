@@ -41,17 +41,6 @@
     margin: 10px 0;
 }
 
-#overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
 #logo-container {
     position: absolute;
     top: 3vw;
@@ -61,6 +50,104 @@
 #logo-container img {
     width: 45vw;
     height: auto;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#menu-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+}
+
+.menu-text-container {
+    position: absolute;
+    top: 18%;
+    left: 8%;
+    right: 12%;
+    bottom: 8%;
+    overflow-y: auto;
+    padding: 10px;
+    font-family: Satoshi-Regular;
+    font-size: 1rem;
+    color: #0D1E4C;
+    /* for debugging */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+/* Scrollbar styling for .menu-text-container */
+.menu-text-container::-webkit-scrollbar {
+    width: 10px;
+}
+.menu-text-container::-webkit-scrollbar-track {
+    background: #FFE8F5;
+    border-radius: 5px;
+}
+.menu-text-container::-webkit-scrollbar-thumb {
+    background: #FF96E4;
+    border-radius: 5px;
+    border: 2px solid #FFE8F5;
+}
+.menu-text-container::-webkit-scrollbar-thumb:hover {
+    background: #FF6FCF;
+}
+.menu-text-container {
+    scrollbar-width: thin;
+    scrollbar-color: #FF96E4 #FFE8F5;
+}
+
+/* Markdown -> HTML conversion for menu text content */
+.menu-text-container h2 {
+    font-family: Satoshi-Bold;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.menu-text-container h3 {
+    font-family: Satoshi-Medium;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.menu-text-container p {
+    font-family: Satoshi-Regular;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.menu-text-container ul, .menu-text-container ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.menu-text-container li {
+    font-family: Satoshi-Regular;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.menu-text-container strong {
+    font-family: Satoshi-Bold;
+}
+
+.menu-text-container em {
+    font-style: italic;
 }
 
 /* Styles for larger screens (tablet and desktop) */
@@ -83,5 +170,9 @@
     #logo-container img {
         width: 25vw;
         height: auto;
+    }
+
+    .menu-text-container {
+        left: 5%;
     }
 }
