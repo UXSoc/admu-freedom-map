@@ -231,3 +231,18 @@ function deletePost(postId) {
         })
         .catch(error => console.error('Error deleting posted pin:', error));
 }
+
+// Add event listener for the logout button
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', () => {
+    logout();
+});
+
+// Logout function
+function logout() {
+    // Clear the token from localStorage
+    localStorage.removeItem('token');
+
+    // Redirect to the login page
+    showPasswordPage();
+}
