@@ -41,3 +41,30 @@ The Atenean Freedom Map is an interactive web application that allows users to e
     npm start
     ```
 5. Open your browser and navigate to `http://localhost:3000`.
+
+## Moderation Notes
+Moderators can access the admin page by adding `/admin` to the website's url. Then, a login view will be prompted, where a username and password is needed to access the admin view.
+
+Moderators can:
+- **Accept** or **Reject** posted pin messages.
+- **Delete** already-posted pins. 
+
+Ask UX Society's Engineering Department for the admin user credentials to access the admin view.
+
+### How to create a new admin user
+
+The current implementation of the user authentication system for the admin page uses [bcrypt](https://www.npmjs.com/package/bcrypt), a library that helps in hashing passwords. This means that the MongoDB database contains only hashed passwords of the admin users.
+
+**Only follow the steps below if the current project members wish to add more admin users. Ask the past project members if the existing admin user credentials is forgotten.**
+
+To add a new admin user:
+
+1. Have access to the MongoDB connection string. Ask past developers for this.
+2. Connect to the MongoDB database (commonly through [MongoDB Compass](https://www.mongodb.com/try/download/atlascli)).
+3. Add a new document under the **admins** collection, under **test** database.
+
+    3.1. Copy the format of the existing document.
+
+4. You shall be seeing that the existing password for the existing admin credential is hashed. To hash your preferred password, use [this website](bcrypt-generator.com). **Use 12 rounds of hashing**.
+
+5. After adding a new document, you can now login to ther admin page with your new admin credentials.
